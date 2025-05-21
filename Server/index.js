@@ -1,17 +1,22 @@
 // const http = require("node : http");
 const http = require("http");
 const fs = require("fs");
+const url = require("url");
 
 const myServer = http.createServer((req, res) => {
+    if(req.url === '/favicon.ico') return res.end();
     const log = `${Date.now()} : ${req.url} : New Req Received\n`;
+    const myUrl = url.parse(req.url, true);
+    console.log(myUrl);
     fs.appendFile("log.txt", log, () => {
-        switch (req.url) {
+        switch (myUrl.pathname) {
             case '/' : 
                 res.end("Welcome to the Homepage");
                 break;
 
             case '/about-us' :
-                res.end("I am Chirag Singh Manral");
+                const username = myUrl.query.name;
+                res.end(`I am ${username}`);
                 break;
 
             case '/buy-now' :
