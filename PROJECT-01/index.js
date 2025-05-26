@@ -5,7 +5,20 @@ const app = express();
 const PORT = 4444;
 
 // Middleware
-app.use(express.urlencoded({ extended : false }));
+app.use(express.urlencoded({ extended : false })); // Built-in Middleware
+
+// Custom Middleware
+app.use((req, res, next) => {
+    console.log("Middleware 1");
+    next();
+    // return res.json({ msg : "This is middleware 1"});
+})
+
+app.use((req, res, next) => {
+    console.log("Middleware 2");
+    next();
+    // return res.json({ msg : "This is middleware 2"});
+})
 
 // Routes
 app.get("/", (req, res) => {
