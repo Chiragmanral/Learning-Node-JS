@@ -4,3 +4,21 @@
 1748348768062 : ::1 GET : /users 
 
 1748348778198 : ::1 GET : /api/users 
+
+1748413492846 : ::1 GET : /users 
+
+1748413510567 : ::1 GET : /user 
+
+1748413510663 : ::1 GET : /favicon.ico 
+
+1748413841554 : ::1 GET : /api/users 
+
+1748413953616 : ::1 POST : /api/users 
+
+1748414056745 : ::1 POST : /api/users 
+
+1748414101974 : ::1 POST : /api/users 
+
+1748414159224 : ::1 GET : /api/users/6836ae95dffd3684b68e499d 
+
+1748414184621 : ::1 DELETE : /api/users/6836ae95dffd3684b68e499d 

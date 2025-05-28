@@ -15,7 +15,7 @@ async function handleCreateNewUser(req, res) {
     })
 
     console.log("result", result);
-    return res.status(201).json({ msg : "created successfully", id : _id});
+    return res.status(201).json({ msg : "created successfully", id : result._id});
 }
 
 async function handleGetAllUsers(req, res) {
