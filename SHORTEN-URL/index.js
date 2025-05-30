@@ -4,7 +4,6 @@ const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const { connectToMongoDb } = require("./connection");
 const URL = require("./models/url");
-const { homedir } = require("os");
 
 const app = express();
 const PORT = 8000;
@@ -22,7 +21,8 @@ app.use(express.urlencoded({ extended : false }))
 app.use("/url", urlRoute);
 app.use("/", staticRoute);
 
-app.get("/:shortId", async (req, res) => {
+app.route("/:shortId")
+.get(async (req, res) => {
      const shortId = req.params.shortId;
      const entry = await URL.findOneAndUpdate({ shortId }, {
           $push : {
@@ -32,11 +32,21 @@ app.get("/:shortId", async (req, res) => {
           }
      }
      )
-     if(entry.redirectURL !== null) {
-          res.redirect(entry.redirectURL);
+
+     if (!entry) {
+        return res.status(404).send("Short URL not found");
+     }
+     res.redirect(entry.redirectURL);
+})
+.delete(async (req, res) => {
+     const id = req.params.shortId;
+     const deleted = await URL.findOneAndDelete( { shortId : id } );
+
+     if(deleted) {
+          res.status(200).json({ msg : "deleted successfully"});
      }
      else {
-          res.end("Redirect URL does not exist!!");
+          res.status(400).json( { msg : "Please provide a valid shortId " });
      }
 })
 
