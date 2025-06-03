@@ -15,8 +15,11 @@
     <div>
     <% if (locals.id) { %>
     <h4>URL Generated: http://localhost:8000/<%= id %></h4>
-    <%} else { %>
-    <% } %><legend>
+    <%} 
+    
+    else { %>
+    <% } %>
+    <legend>
         <form method="post" action="/url">
           <label for="url">Enter your original URL : </label>
           <input
@@ -31,7 +34,7 @@
       </legend>
     </div>
 
-    <div>
+    <div style="margin-top: 30px">
       <% if (locals.urls) { %>
         <table>
           <thead>
